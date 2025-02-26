@@ -154,6 +154,51 @@ public:
     }
 };
 
+// 登录方式管理类，形成责任链 单例模式
 class LoginManager
 {
+public:
+    vector<LoginUser *> lus;
+
+    LoginManager()
+    {
+        LoginUser *lu1 = new LoginUserAndPassWord();
+        LoginUser *lu2 = new LoginPhoneAndPassWord();
+        // 用户名密码登录
+        lus.push_back(lu1);
+        // 手机号密码登录
+        lus.push_back(lu2);
+
+        // 设置登录方式的顺序
+        for (int i = 0; i < lus.size(); i++)
+        {
+            LoginUser *secondLu = lus[i + 1];
+            if (secondLu != NULL)
+            {
+                cout << "lu1: " << lu1 << "lu2: " << lu2 << "secondLu:" << secondLu << endl;
+                lus[i]->setUser(secondLu);
+            }
+        }
+    }
+
+    static LoginManager *instance;
+    static LoginManager *getInstance()
+    {
+        if (instance == NULL)
+        {
+            instance = new LoginManager();
+        }
+        return instance;
+    }
+
+public:
+    bool handLoginManagere(LoginWay *uPw)
+    {
+        cout << "lus size: " << lus.size() << endl;
+        if (lus.size() == 0)
+        {
+            return false;
+        }
+        return lus[0]->HandleLoginUser(uPw);
+    }
 };
