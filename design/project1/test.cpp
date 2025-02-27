@@ -202,3 +202,96 @@ public:
         return lus[0]->HandleLoginUser(uPw);
     }
 };
+
+// 登录主题接口
+class ObjectUser
+{
+public:
+    // 登录
+    virtual bool login(LoginWay *lw) = 0;
+    // 验证是否登录
+    virtual bool isLogin() = 0;
+};
+
+// xml登录主题
+class XMLObjectUser : public ObjectUser
+{
+private:
+    LoginWay *lw;
+
+public:
+    bool login(LoginWay *lw)
+    {
+        // 设置用户密码
+        string password = "123456";
+        lw->setPassword(password);
+
+        // 调用LoginManager()方法触发责任链
+        if (LoginManager::getInstance()->handLoginManagere(lw))
+        {
+            cout << "登录成功" << endl;
+
+            this->lw = lw;
+            return true;
+        }
+        return false;
+    }
+
+    bool isLogin()
+    {
+        return lw != NULL;
+    }
+    string getUserName()
+    {
+        return lw->getLoginNameorNum();
+    }
+};
+
+// 提供全局获取ObjectUser的方法
+class MainEntrance
+{
+public:
+    static XMLObjectUser *xml;
+    static unordered_map<string, XMLObjectUser *> xmlOU;
+
+    // 获取当前请求的用户信息
+    static XMLObjectUser *getXMLSubject()
+    {
+        string name = "xml";
+
+        // 查找是否存在该用户
+        for (auto xxmm : xmlOU)
+        {
+            auto it = xmlOU.find(name);
+            if (it != xmlOU.end())
+            {
+                return it->second;
+            }
+        }
+        cout << "xml ? " << (xml) << endl;
+
+        return (xml == NULL) ? (xml = new XMLObjectUser()) : xml;
+    }
+
+    static void addXMLObjectUser(string s, XMLObjectUser *xmlObject)
+    {
+        xmlOU.emplace(s, xmlObject);
+    }
+};
+
+LoginManager *LoginManager::instance = new LoginManager();
+XMLObjectUser *MainEntrance::xml;
+unordered_map<string, XMLObjectUser *> MainEntrance::xmlOU{{"xml", new XMLObjectUser()}, {"xml1", new XMLObjectUser()}};
+int main()
+{
+    MainEntrance::addXMLObjectUser("xml", new XMLObjectUser());
+    MainEntrance::addXMLObjectUser("18888", new XMLObjectUser());
+
+    XMLObjectUser *currentUser = MainEntrance::getXMLSubject();
+    cout << "是否已经登录？ " << currentUser->isLogin() << endl;
+    currentUser->login(new UserAndPassWord("xml", "123456"));
+    cout << "是否已经登录？ " << currentUser->isLogin() << endl;
+    currentUser->login(new PhoneAndPassWord("18888", "123456"));
+    cout << "是否已经登录？ " << currentUser->isLogin() << endl;
+    return 0;
+}
