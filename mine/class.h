@@ -1,8 +1,8 @@
 #pragma once
 #include "game.h"
-
-//构建棋盘基类，延迟初始化至子类实现，同时构建抽象工厂类，实现开闭原则
-// 棋盘基类
+#include "print.h"
+// 构建棋盘基类，延迟初始化至子类实现，同时构建抽象工厂类，实现开闭原则
+//  棋盘基类
 class Chessinitial
 {
 private:
@@ -22,18 +22,6 @@ protected:
 
 public:
     virtual ~Chessinitial() {};
-
-    void print() const
-    {
-        for (const auto &row : chess)
-        {
-            for (char c : row)
-            {
-                std::cout << c << " ";
-            }
-            std::cout << "\n";
-        }
-    }
 };
 
 // 雷棋盘类
@@ -79,4 +67,3 @@ public:
         return new Chessinitial_Show(row, col, SHOW);
     }
 };
-
