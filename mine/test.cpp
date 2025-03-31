@@ -9,39 +9,46 @@
 
 void test1()
 {
-    Client *client = new Client;
+
     print_welcome();
     int start = 0;
     while (std::cin >> start)
     {
+        Client *client;
         if (start == 1)
         {
             print_menu();
-            int select = 0;
-            std::cin >> select;
-            switch (select)
+            int i = 0;
+            std::cin >> i;
+            switch (i)
             {
-            case 1:
-                client = new Client(ROW1, COL1, WIN1);
+            case1:
+            {
+                client = new Client(ROW1, COL1, i);
+                client->client_print();
                 break;
-            case 2:
-                client = new Client(ROW2, COL2, WIN2);
+            }
+            case2:
+            {
+                client = new Client(ROW2, COL2, i);
+                client->client_print();
                 break;
-            case 3:
-                client = new Client(ROW3, COL3, WIN3);
+            }
+            case3:
+            {
+                client = new Client(ROW3, COL3, i);
+                client->client_print();
                 break;
-            case 4:
-                int row, col, win;
-                std::cout << "please input row, col, win" << std::endl;
-                std::cin >> row >> col >> win;
-                client = new Client(row, col, win);
+            }
+            case4:
+            {
+                int row = 0, col = 0;
+                std::cout << "please input row and col:";
+                std::cin >> row >> col;
+                client = new Client(row, col, i);
+                client->client_print();
                 break;
-            case 0:
-                exit(0);
-                break;
-            default:
-                std::cout << "please input again" << std::endl;
-                break;
+            }
             }
         }
     }
@@ -63,9 +70,10 @@ int main()
 
     // // 手动释放内存
     // delete mineMap;
+
     // delete showLayer;
     // delete minefactory;
     // delete showfactory;
-
+    test1();
     return 0;
 }
