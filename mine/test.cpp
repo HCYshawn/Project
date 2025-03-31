@@ -20,36 +20,36 @@ void test1()
             print_menu();
             int i = 0;
             std::cin >> i;
-            switch (i)
-            {
-            case1:
-            {
-                client = new Client(ROW1, COL1, i);
-                client->client_print();
-                break;
-            }
-            case2:
-            {
-                client = new Client(ROW2, COL2, i);
-                client->client_print();
-                break;
-            }
-            case3:
-            {
-                client = new Client(ROW3, COL3, i);
-                client->client_print();
-                break;
-            }
-            case4:
-            {
-                int row = 0, col = 0;
-                std::cout << "please input row and col:";
-                std::cin >> row >> col;
-                client = new Client(row, col, i);
-                client->client_print();
-                break;
-            }
-            }
+            // switch (i)
+            // {
+            // case1:
+            // {
+            //     client = new Client(ROW1, COL1, i);
+            //     client->client_print();
+            //     break;
+            // }
+            // case2:
+            // {
+            //     client = new Client(ROW2, COL2, i);
+            //     client->client_print();
+            //     break;
+            // }
+            // case3:
+            // {
+            //     client = new Client(ROW3, COL3, i);
+            //     client->client_print();
+            //     break;
+            // }
+            // case4:
+            // {
+            //     int row = 0, col = 0;
+            //     std::cout << "please input row and col:";
+            //     std::cin >> row >> col;
+            //     client = new Client(row, col, i);
+            //     client->client_print();
+            //     break;
+            // }
+            // }
         }
     }
 }
