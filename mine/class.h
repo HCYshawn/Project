@@ -22,7 +22,7 @@ protected:
 
 public:
     virtual ~Chessinitial() {};
-    virtual void print()
+    void print_chess()
     {
         for (int i = 0; i < _row; i++)
         {
@@ -36,60 +36,18 @@ public:
 };
 
 // 雷棋盘类
-class Chessinitial_Mine_10 : public Chessinitial
+class Chessinitial_Mine : public Chessinitial
 {
 public:
-    Chessinitial_Mine_10(int row = ROW1, int col = COL1, char re = MINE)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Mine_40 : public Chessinitial
-{
-public:
-    Chessinitial_Mine_40(int row = ROW2, int col = COL2, char re = MINE)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Mine_99 : public Chessinitial
-{
-public:
-    Chessinitial_Mine_99(int row = ROW3, int col = COL3, char re = MINE)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Mine_custom : public Chessinitial
-{
-public:
-    Chessinitial_Mine_custom(int row, int col, char re)
+    Chessinitial_Mine(int row, int col, char re)
         : Chessinitial(row, col, re) {}
 };
 
 // 显示棋盘类
-class Chessinitial_Show_10 : public Chessinitial
+class Chessinitial_Show : public Chessinitial
 {
 public:
-    Chessinitial_Show_10(int row = ROW1, int col = COL1, char re = SHOW)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Show_40 : public Chessinitial
-{
-public:
-    Chessinitial_Show_40(int row = ROW2, int col = COL2, char re = SHOW)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Show_99 : public Chessinitial
-{
-public:
-    Chessinitial_Show_99(int row = ROW3, int col = COL3, char re = SHOW)
-        : Chessinitial(row, col, re) {}
-};
-
-class Chessinitial_Show_custom : public Chessinitial
-{
-public:
-    Chessinitial_Show_custom(int row, int col, char re)
+    Chessinitial_Show(int row, int col, char re)
         : Chessinitial(row, col, re) {}
 };
 
@@ -98,28 +56,16 @@ class Chessinitial_Factory
 {
 public:
     virtual ~Chessinitial_Factory() = default;
-    virtual Chessinitial *create(int row, int col, int i) = 0;
+    virtual Chessinitial *create(int row, int col, char re) = 0;
 };
 
 // 具体工厂类————雷棋盘工厂
 class MineFactory : public Chessinitial_Factory
 {
 public:
-    Chessinitial *create(int row, int col, int i) override
+    Chessinitial *create(int row, int col, char re) override
     {
-        switch (i)
-        {
-        case 1:
-            return new Chessinitial_Mine_10(row, col, MINE);
-        case 2:
-            return new Chessinitial_Mine_40(row, col, MINE);
-        case 3:
-            return new Chessinitial_Mine_99(row, col, MINE);
-        case 4:
-            return new Chessinitial_Mine_custom(row, col, MINE);
-        default:
-            return nullptr;
-        }
+        return new Chessinitial_Mine(row, col, MINE);
     }
 };
 
@@ -127,20 +73,8 @@ public:
 class ShowFactory : public Chessinitial_Factory
 {
 public:
-    Chessinitial *create(int row, int col, int i) override
+    Chessinitial *create(int row, int col, char re) override
     {
-        switch (i)
-        {
-        case 1:
-            return new Chessinitial_Show_10(row, col, SHOW);
-        case 2:
-            return new Chessinitial_Show_40(row, col, SHOW);
-        case 3:
-            return new Chessinitial_Show_99(row, col, SHOW);
-        case 4:
-            return new Chessinitial_Show_custom(row, col, SHOW);
-        default:
-            return nullptr;
-        }
+        return new Chessinitial_Show(row, col, SHOW);
     }
 };

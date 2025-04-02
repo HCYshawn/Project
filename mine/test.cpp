@@ -9,50 +9,53 @@
 
 void test1()
 {
-
     print_welcome();
-    int start = 0;
-    while (std::cin >> start)
+    int select = 0;
+    std::cout << "please select: ";
+    do
     {
-        Client *client;
-        if (start == 1)
+        print_menu();
+        int i = 0;
+        while (std::cin >> i)
         {
-            print_menu();
-            int i = 0;
-            std::cin >> i;
-            // switch (i)
-            // {
-            // case1:
-            // {
-            //     client = new Client(ROW1, COL1, i);
-            //     client->client_print();
-            //     break;
-            // }
-            // case2:
-            // {
-            //     client = new Client(ROW2, COL2, i);
-            //     client->client_print();
-            //     break;
-            // }
-            // case3:
-            // {
-            //     client = new Client(ROW3, COL3, i);
-            //     client->client_print();
-            //     break;
-            // }
-            // case4:
-            // {
-            //     int row = 0, col = 0;
-            //     std::cout << "please input row and col:";
-            //     std::cin >> row >> col;
-            //     client = new Client(row, col, i);
-            //     client->client_print();
-            //     break;
-            // }
-            // }
+            if (i == 0)
+            {
+                std::cout << "exit" << std::endl;
+                break;
+            }
+            else if (i == 1)
+            {
+                Client client(ROW1, COL1, WIN1);
+                client.play();
+            }
+            else if (i == 2)
+            {
+                Client client(ROW2, COL2, WIN2);
+                client.play();
+            }
+            else if (i == 3)
+            {
+                Client client(ROW3, COL3, WIN3);
+                client.play();
+            }
+            else if (i == 4)
+            {
+                int row = 0;
+                int col = 0;
+                int win = 0;
+                std::cout << "please input row col win: ";
+                std::cin >> row >> col >> win;
+                Client client(row, col, win);
+                client.play();
+            }
+            else
+            {
+                std::cout << "error" << std::endl;
+            }
         }
-    }
+    } while (std::cin >> select);
 }
+
 int main()
 {
 
@@ -74,6 +77,7 @@ int main()
     // delete showLayer;
     // delete minefactory;
     // delete showfactory;
+
     test1();
     return 0;
 }
