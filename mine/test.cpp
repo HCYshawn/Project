@@ -9,51 +9,72 @@
 
 void test1()
 {
-    print_welcome();
-    int select = 0;
-    std::cout << "please select: ";
+
+    int select = 1;
+
     do
     {
-        print_menu();
-        int i = 0;
-        while (std::cin >> i)
+        print_welcome();
+        std::cout << "please select: ";
+        std::cin >> select;
+        if (select == 1)
         {
-            if (i == 0)
+            print_menu();
+            // int i = 0;
+            // while (std::cin >> i)
+            // {
+            //     switch(i)
+            //     case 0:
+            //         std::cout << "exit" << std::endl;
+            //         break;
+            //     case 1:
+            //         Client client(ROW1, COL1, WIN1);
+            //         client.play();
+            //         break;
+            //     case 2:
+            //         Client client(ROW2, COL2, WIN2);
+            //         client.play();
+            //         break;
+            //     case 3:
+            //         Client client(ROW3, COL3, WIN3);
+            //         client.play();
+            //         break;
+            //     case 4:
+            //         int row = 0;
+            //         int col = 0;
+            //         int win = 0;
+            //         std::cout << "please input row col win: ";
+            //         std::cin >> row >> col >> win;
+            //         Client client(row, col, win);
+            //         client.play();
+            //         break;
+            //     default:
+            //         std::cout << "error" << std::endl;
+            //         break;
+        }
+        else if (select == 2)
+        {
+            std::cout << "please select a description language: " << std::endl;
+            std::cout << "1. ÖÐÎÄ 2. ENGLISH " << std::endl;
+            int j = 0;
+            std::cout << "please select: ";
+            std::cin >> j;
+            if (j == 1)
             {
-                std::cout << "exit" << std::endl;
-                break;
             }
-            else if (i == 1)
+            else if (j == 2)
             {
-                Client client(ROW1, COL1, WIN1);
-                client.play();
-            }
-            else if (i == 2)
-            {
-                Client client(ROW2, COL2, WIN2);
-                client.play();
-            }
-            else if (i == 3)
-            {
-                Client client(ROW3, COL3, WIN3);
-                client.play();
-            }
-            else if (i == 4)
-            {
-                int row = 0;
-                int col = 0;
-                int win = 0;
-                std::cout << "please input row col win: ";
-                std::cin >> row >> col >> win;
-                Client client(row, col, win);
-                client.play();
+                print_description_english();
             }
             else
-            {
-                std::cout << "error" << std::endl;
-            }
+                std::cout << "exit..." << std::endl;
         }
-    } while (std::cin >> select);
+        else
+        {
+            std::cout << "game exit..." << std::endl;
+            break;
+        }
+    } while (select);
 }
 
 int main()
