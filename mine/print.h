@@ -1,6 +1,8 @@
 #pragma once
 #include <stdio.h>
+#include "class.h"
 
+// 欢迎菜单以及一级菜单
 void print_welcome()
 {
     printf("/---------------------------\\\n");
@@ -14,6 +16,7 @@ void print_welcome()
     printf("\\---------------------------/\n");
 }
 
+// 游戏菜单以及二级菜单
 void print_menu()
 {
     printf("/-------------------------\\\n");
@@ -29,6 +32,7 @@ void print_menu()
     printf("\\-------------------------/\n");
 }
 
+// 游戏说明
 void print_description_english()
 {
     printf("/------------------------------------------------------------------\\\n");
@@ -52,4 +56,78 @@ void print_description_english()
     printf("||       Please enter ' 0 ' to exit the instrucitons.             ||\n");
     printf("|\\----------------------------------------------------------------/|\n");
     printf("\\------------------------------------------------------------------/\n");
+}
+
+// 打印边框上
+void print_upperborder(int row)
+{
+
+    printf("/");
+    for (int i = 0; i <= row * 2 + 6; i++)
+    {
+        printf("-");
+    }
+    printf("\\");
+    printf("\n");
+    printf("|/");
+    for (int i = 0; i <= row * 2 + 4; i++)
+    {
+        printf("-");
+    }
+    printf("\\|\n");
+}
+
+// 打印边框下
+void print_lowerborder(int row)
+{
+    printf("|\\");
+    for (int i = 0; i <= row * 2 + 4; i++)
+    {
+        printf("-");
+    }
+    printf("/|\n");
+    printf("\\");
+    for (int i = 0; i <= row * 2 + 6; i++)
+    {
+        printf("-");
+    }
+    printf("/\n");
+}
+
+// 打印上行标
+void print_uppercolsign(int i, int row)
+{
+    if (i + 1 == 1)
+    {
+        printf("|| ");
+        for (int i = 0; i <= row; i++)
+        {
+            if (i % 10 == 0 && i != 0)
+            {
+                printf("%d", i);
+            }
+            else
+                printf("%d ", i % 10);
+        }
+        printf("  ||\n");
+    }
+}
+
+// 打印下行标
+void print_lowercolsign(int i, int col, int row)
+{
+    if (i + 1 == col)
+    {
+        printf("|| ");
+        for (int i = 0; i <= row; i++)
+        {
+            if (i % 10 == 0 && i != 0)
+            {
+                printf("%d", i);
+            }
+            else
+                printf("%d ", i % 10);
+        }
+        printf("  ||\n");
+    }
 }

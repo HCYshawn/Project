@@ -1,8 +1,8 @@
 #pragma once
 #include "game.h"
 #include "print.h"
-// ¹¹½¨ÆåÅÌ»ùÀà£¬ÑÓ³Ù³õÊ¼»¯ÖÁ×ÓÀàÊµÏÖ£¬Í¬Ê±¹¹½¨³éÏó¹¤³§Àà£¬ÊµÏÖ¿ª±ÕÔ­Ôò
-//  ÆåÅÌ»ùÀà
+// æ„å»ºæ£‹ç›˜åŸºç±»ï¼Œå»¶è¿Ÿåˆå§‹åŒ–è‡³å­ç±»å®ç°ï¼ŒåŒæ—¶æ„å»ºæŠ½è±¡å·¥å‚ç±»ï¼Œå®ç°å¼€é—­åŸåˆ™
+//  æ£‹ç›˜åŸºç±»
 class Chessinitial
 {
 private:
@@ -16,7 +16,7 @@ protected:
         : _row(row),
           _col(col),
           _re(),
-          chess(row, std::vector<char>(col, re))
+          chess(col, std::vector<char>(row, re))
     {
     }
 
@@ -33,9 +33,16 @@ public:
             std::cout << std::endl;
         }
     }
+    void print_row(int i)
+    {
+        for (int j = 0; j < chess[i].size(); j++)
+        {
+            std::cout << chess[i][j] << " ";
+        }
+    }
 };
 
-// À×ÆåÅÌÀà
+// é›·æ£‹ç›˜ç±»
 class Chessinitial_Mine : public Chessinitial
 {
 public:
@@ -43,7 +50,7 @@ public:
         : Chessinitial(row, col, re) {}
 };
 
-// ÏÔÊ¾ÆåÅÌÀà
+// æ˜¾ç¤ºæ£‹ç›˜ç±»
 class Chessinitial_Show : public Chessinitial
 {
 public:
@@ -51,7 +58,7 @@ public:
         : Chessinitial(row, col, re) {}
 };
 
-// ³éÏó¹¤³§»ùÀà
+// æŠ½è±¡å·¥å‚åŸºç±»
 class Chessinitial_Factory
 {
 public:
@@ -59,7 +66,7 @@ public:
     virtual Chessinitial *create(int row, int col, char re) = 0;
 };
 
-// ¾ßÌå¹¤³§Àà¡ª¡ª¡ª¡ªÀ×ÆåÅÌ¹¤³§
+// å…·ä½“å·¥å‚ç±»â€”â€”â€”â€”é›·æ£‹ç›˜å·¥å‚
 class MineFactory : public Chessinitial_Factory
 {
 public:
@@ -69,7 +76,7 @@ public:
     }
 };
 
-// ¾ßÌå¹¤³§Àà¡ª¡ª¡ª¡ªÏÔÊ¾ÆåÅÌ¹¤³§
+// å…·ä½“å·¥å‚ç±»â€”â€”â€”â€”æ˜¾ç¤ºæ£‹ç›˜å·¥å‚
 class ShowFactory : public Chessinitial_Factory
 {
 public:
