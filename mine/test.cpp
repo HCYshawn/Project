@@ -70,12 +70,13 @@ void test1()
         else if (select == 2)
         {
             std::cout << "please select a description language: " << std::endl;
-            std::cout << "1. 中文 2. ENGLISH " << std::endl;
+            std::cout << "1. 涓枃 2. ENGLISH " << std::endl;
             int j = 0;
             std::cout << "please select: ";
             std::cin >> j;
             if (j == 1)
             {
+                print_description_chinese();
             }
             else if (j == 2)
             {
@@ -94,20 +95,20 @@ void test1()
 
 int main()
 {
-
+    SetConsoleOutputCP(CP_UTF8);
     // Chessinitial_Factory *minefactory = new MineFactory();
     // Chessinitial_Factory *showfactory = new ShowFactory();
 
-    // // 生产不同产品
+    // // 锟斤拷锟斤拷锟斤拷同锟斤拷品
     // Chessinitial *mineMap = minefactory->create(ROW2, COL2, MINE);
     // Chessinitial *showLayer = showfactory->create(ROW2, COL2, SHOW);
-    // // 使用产品
+    // // 使锟矫诧拷品
     // mineMap->print();
     // std::cout << std::endl;
     // showLayer->print();
     // std::cout << std::endl;
 
-    // // 手动释放内存
+    // // 锟街讹拷锟酵凤拷锟节达拷
     // delete mineMap;
 
     // delete showLayer;

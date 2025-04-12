@@ -4,6 +4,7 @@
 #include <vector>
 #include <ctime>
 #include <memory>
+#include <windows.h>
 
 #define GAMEMINE1 10
 #define GAMEMINE2 40
