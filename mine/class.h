@@ -15,31 +15,18 @@ protected:
     Chessinitial(int row, int col, char re)
         : _row(row),
           _col(col),
-          _re(),
+          _re(re),
           chess(col, std::vector<char>(row, re))
     {
     }
 
 public:
     virtual ~Chessinitial() {};
-    void print_chess()
+    std::vector<std::vector<char>> &GetChess()
     {
-        for (int i = 0; i < _row; i++)
-        {
-            for (int j = 0; j < _col; j++)
-            {
-                std::cout << chess[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }
+        return chess;
     }
-    void print_row(int i)
-    {
-        for (int j = 0; j < chess[i].size(); j++)
-        {
-            std::cout << chess[i][j] << " ";
-        }
-    }
+    virtual void print_row(int i) = 0;
 };
 
 // 雷棋盘类
@@ -48,6 +35,7 @@ class Chessinitial_Mine : public Chessinitial
 public:
     Chessinitial_Mine(int row, int col, char re)
         : Chessinitial(row, col, re) {}
+    void print_row(int i) override { /* 空实现或抛出异常 */ }
 };
 
 // 显示棋盘类
@@ -56,6 +44,15 @@ class Chessinitial_Show : public Chessinitial
 public:
     Chessinitial_Show(int row, int col, char re)
         : Chessinitial(row, col, re) {}
+
+    void print_row(int i)
+    {
+        const auto &show_chess = GetChess();
+        for (int j = 0; j < show_chess[i].size(); j++)
+        {
+            std::cout << show_chess[i][j] << " ";
+        }
+    }
 };
 
 // 抽象工厂基类

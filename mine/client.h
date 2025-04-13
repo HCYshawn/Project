@@ -8,15 +8,15 @@ private:
     Chessinitial *chess_show;
     int _row;
     int _col;
-    int win;
+    int _win;
 
 public:
     Client(int row = ROW1, int col = COL1, int win = WIN1)
-        : _row(row), _col(col), win(win)
+        : _row(row), _col(col), _win(win)
     {
         Chessinitial_Factory *minefactory = new MineFactory();
         Chessinitial_Factory *showfactory = new ShowFactory();
-        chess_mine = minefactory->create(_row, _col, MINE);
+        chess_mine = minefactory->create(_row + 2, _col + 2, MINE);
         chess_show = showfactory->create(_row, _col, SHOW);
     }
 
@@ -68,9 +68,24 @@ public:
         print_lowerborder(_row);
     }
 
+    void Arrangemine()
+    {
+        int mid = _win;
+        auto &mine_chess = chess_mine->GetChess();
+        while (mid)
+        {
+            int x = rand() % _row + 1;
+            int y = rand() % _col + 1;
+
+            if (mine_chess[x][y] == '0')
+            {
+                mine_chess[x][y] = '1';
+                mid--;
+            }
+        }
+    }
+
     void play()
     {
-        chess_mine->print_chess();
-        chess_show->print_chess();
     }
 };
