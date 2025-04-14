@@ -99,16 +99,16 @@ int main()
     // Chessinitial_Factory *minefactory = new MineFactory();
     // Chessinitial_Factory *showfactory = new ShowFactory();
 
-    // // ������ͬ��Ʒ
+    // // 锟斤拷锟斤拷锟斤拷同锟斤拷品
     // Chessinitial *mineMap = minefactory->create(ROW2, COL2, MINE);
     // Chessinitial *showLayer = showfactory->create(ROW2, COL2, SHOW);
-    // // ʹ�ò�Ʒ
+    // // 使锟矫诧拷品
     // mineMap->print();
     // std::cout << std::endl;
     // showLayer->print();
     // std::cout << std::endl;
 
-    // // �ֶ��ͷ��ڴ�
+    // // 锟街讹拷锟酵凤拷锟节达拷
     // delete mineMap;
 
     // delete showLayer;

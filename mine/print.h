@@ -47,8 +47,9 @@ void print_description_english()
     printf("|| > The game will automatically help you exclude the grid that   ||\n");
     printf("||   doesn't meet the above criteria.                             ||\n");
     printf("|| > Enter ' 0 0 ' to enter the annotation mode, in which you can ||\n");
-    printf("||   annotate the coordinates that may be mines. Enter ' 0 1 '    ||\n");
-    printf("||   again to exit the annotation mode.                           ||\n");
+    printf("||   annotate the coordinates that may be mines. Enter ' 0 1 ' to ||\n");
+    printf("||   cancel the label, and enter ' 0 0 ' again to exit the        ||\n");
+    printf("||   labeling mode.                                               ||\n");
     printf("|| > The game stipulates that ' * ' is thunder, and the           ||\n");
     printf("||   coordinate grid marke in the labeling mode is disaplayed     ||\n");
     printf("||   as ' ! ' .                                                   ||\n");
@@ -69,7 +70,8 @@ void print_description_chinese()
     printf("|| > 当坐标周围8格内有雷时, 坐标格子会显示雷的数量                ||\n");
     printf("|| > 游戏会自动帮你排除不符合上述条件的格子                       ||\n");
     printf("|| > 输入 ' 0 0 ' 进入标注模式，在该模式下可以对可能是雷的坐标    ||\n");
-    printf("||   格子进行标注，再次输入 ' 0 1 ' 则退出标注模式                ||\n");
+    printf("||   格子进行标注，输入' 0 1 '以取消标记，再次输入 ' 0 0 ' 则     ||\n");
+    printf("||   退出标注模式                                                 ||\n");
     printf("|| > 游戏规定 ' * ' 为雷，标注模式下的坐标格子标记为 ' ! ' .      ||\n");
     printf("||----------------------------------------------------------------||\n");
     printf("||                    请按 ' 0 ' 键退出说明。                     ||\n");

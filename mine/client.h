@@ -85,7 +85,83 @@ public:
         }
     }
 
-    void play()
+    int Retmine(int x, int y)
+    {
+        auto &mine_chess = chess_mine->GetChess();
+        int ret = (mine_chess[x - 1][y - 1] + mine_chess[x - 1][y] + mine_chess[x - 1][y + 1] + mine_chess[x][y - 1] + mine_chess[x][y] + mine_chess[x][y + 1] + mine_chess[x + 1][y - 1] + mine_chess[x + 1][y] + mine_chess[x + 1][y + 1] - 8 * '0');
+        return ret;
+    }
+
+    void Install(int x, int y)
+    {
+        if (x < 1 || x >= _row || y < 1 || y > _col)
+        {
+            printf("输入错误，请重新输入！\n");
+            return;
+        }
+
+        auto &mine_chess = chess_mine->GetChess();
+        auto &show_chess = chess_show->GetChess();
+        if (show_chess[x][y] != '#')
+        {
+            return;
+        }
+
+        int mid = Retmine(x, y);
+        if (mid > 0)
+        {
+            _win++;
+            show_chess[x][y] = mid + '0';
+            return;
+        }
+        else if (mid == 0)
+        {
+            _win++;
+            show_chess[x][y] = ' ';
+            Install(x - 1, y - 1);
+            Install(x - 1, y);
+            Install(x - 1, y + 1);
+            Install(x, y - 1);
+            Install(x, y);
+            Install(x, y + 1);
+            Install(x + 1, y - 1);
+            Install(x = 1, y);
+            Install(x + 1, y + 1);
+        }
+    }
+
+    void Tab()
+    {
+        int x = 1;
+        int y = 1;
+        int cin_x = 0;
+        int cin_y = 0;
+        auto &show_chess = chess_show->GetChess();
+        while (1)
+        {
+            printf("请输入要标记的坐标：");
+            std::cin >> cin_x >> cin_y;
+            if ((x > 1 && x <= _row) && (y >= 1 && y <= _col))
+            {
+                show_chess[x][y] = '!';
+            }
+            else if (cin_x == 0 && cin_y == 0)
+            {
+                break;
+            }
+            else if (cin_x == 0 && cin_y == 1)
+            {
+                show_chess[x][y] = '#';
+            }
+            else
+            {
+                printf("输入错误，请重新输入！\n");
+                continue;
+            }
+        }
+    }
+
+    void Play()
     {
     }
 };
