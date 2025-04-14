@@ -21,50 +21,48 @@ void test1()
         {
             print_menu();
             int i = 0;
-            while (std::cin >> i)
+            std::cin >> i;
+            switch (i)
             {
-                switch (i)
-                {
-                case 0:
-                {
-                    std::cout << "exit" << std::endl;
-                    break;
-                }
-                case 1:
-                {
-                    Client client(ROW1, COL1, WIN1);
-                    client.print_game();
-                    break;
-                }
-                case 2:
-                {
-                    Client client(ROW2, COL2, WIN2);
-                    client.print_game();
-                    break;
-                }
-                case 3:
-                {
-                    Client client(ROW3, COL3, WIN3);
-                    client.print_game();
-                    break;
-                }
-                case 4:
-                {
-                    int row = 0;
-                    int col = 0;
-                    int win = 0;
-                    std::cout << "please input row col win: ";
-                    std::cin >> row >> col >> win;
-                    Client client(row, col, win);
-                    client.print_game();
-                    break;
-                }
-                default:
-                {
-                    std::cout << "error" << std::endl;
-                    break;
-                }
-                }
+            case 0:
+            {
+                std::cout << "exit" << std::endl;
+                break;
+            }
+            case 1:
+            {
+                Client client(ROW1, COL1, GAMEMINE1, 0);
+                client.Play();
+                break;
+            }
+            case 2:
+            {
+                Client client(ROW2, COL2, GAMEMINE2, 0);
+                client.Play();
+                break;
+            }
+            case 3:
+            {
+                Client client(ROW3, COL3, GAMEMINE3, 0);
+                client.Play();
+                break;
+            }
+            case 4:
+            {
+                int row = 0;
+                int col = 0;
+                int mine = 0;
+                std::cout << "please input row col win: ";
+                std::cin >> row >> col >> mine;
+                Client client(row, col, mine, 0);
+                client.Play();
+                break;
+            }
+            default:
+            {
+                std::cout << "error" << std::endl;
+                break;
+            }
             }
         }
         else if (select == 2)

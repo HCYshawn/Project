@@ -17,9 +17,5 @@
 #define ROW3 30
 #define COL3 16
 
-#define WIN1 81
-#define WIN2 256
-#define WIN3 480
-
 #define MINE '0'
 #define SHOW '#'
