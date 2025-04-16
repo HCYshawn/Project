@@ -1,6 +1,5 @@
 #pragma once
 #include <stdio.h>
-#include "class.h"
 
 // 打印欢迎界面
 void print_welcome()
@@ -46,6 +45,9 @@ void print_description_english()
     printf("||   grid.                                                        ||\n");
     printf("|| > The game will automatically help you exclude the grid that   ||\n");
     printf("||   doesn't meet the above criteria.                             ||\n");
+    printf("|| > The row number and col number are calculated in %10, such as ||\n");
+    printf("||   11 -> 1, 12 -> 2(20 -> 20). Please enter the original value  ||\n");
+    printf("||   when entering.                                               ||\n");
     printf("|| > Enter ' 0 0 ' to enter the annotation mode, in which you can ||\n");
     printf("||   annotate the coordinates that may be mines. Enter ' 0 1 ' to ||\n");
     printf("||   cancel the label, and enter ' 0 0 ' again to exit the        ||\n");
@@ -69,6 +71,8 @@ void print_description_chinese()
     printf("|| > 游戏通过输入坐标来排雷                                       ||\n");
     printf("|| > 当坐标周围8格内有雷时, 坐标格子会显示雷的数量                ||\n");
     printf("|| > 游戏会自动帮你排除不符合上述条件的格子                       ||\n");
+    printf("|| > 行号和列号以 %10 计算, 如 11 -> 1, 12 -> 2(20 -> 20), 输入时 ||\n");
+    printf("||   请按原值输入                                                 ||\n");
     printf("|| > 输入 ' 0 0 ' 进入标注模式，在该模式下可以对可能是雷的坐标    ||\n");
     printf("||   格子进行标注，输入' 0 1 '以取消标记，再次输入 ' 0 0 ' 则     ||\n");
     printf("||   退出标注模式                                                 ||\n");
@@ -80,18 +84,18 @@ void print_description_chinese()
 }
 
 // 打印上边框
-void print_upperborder(int row)
+void print_upperborder(int col)
 {
 
     printf("/");
-    for (int i = 0; i <= row * 2 + 6; i++)
+    for (int i = 0; i <= col * 2 + 6; i++)
     {
         printf("-");
     }
     printf("\\");
     printf("\n");
     printf("|/");
-    for (int i = 0; i <= row * 2 + 4; i++)
+    for (int i = 0; i <= col * 2 + 4; i++)
     {
         printf("-");
     }
@@ -99,56 +103,68 @@ void print_upperborder(int row)
 }
 
 // 打印下边框
-void print_lowerborder(int row)
+void print_lowerborder(int col)
 {
     printf("|\\");
-    for (int i = 0; i <= row * 2 + 4; i++)
+    for (int i = 0; i <= col * 2 + 4; i++)
     {
         printf("-");
     }
     printf("/|\n");
     printf("\\");
-    for (int i = 0; i <= row * 2 + 6; i++)
+    for (int i = 0; i <= col * 2 + 6; i++)
     {
         printf("-");
     }
     printf("/\n");
 }
 
-// 打印上行标
-void print_uppercolsign(int i, int row)
+// 打印行号
+void print_col_numbers(int cols)
 {
-    if (i + 1 == 1)
+    printf("|| ");
+    for (int j = 0; j <= cols; j++)
     {
-        printf("|| ");
-        for (int i = 0; i <= row; i++)
+        if (j % 10 == 0 && j != 0)
         {
-            if (i % 10 == 0 && i != 0)
-            {
-                printf("%d", i);
-            }
-            else
-                printf("%d ", i % 10);
+            printf("%-2d", j);
         }
-        printf("  ||\n");
+        else
+            printf("%-2d", j % 10);
     }
+    printf("  ||\n");
 }
 
-// 打印下行标
-void print_lowercolsign(int i, int col, int row)
+// 打印棋盘边框
+void print_chessborder(int col)
 {
-    if (i + 1 == col)
+    printf("||  ");
+    for (int j = 0; j <= col * 2; j++)
     {
-        printf("|| ");
-        for (int i = 0; i <= row; i++)
-        {
-            if (i % 10 == 0 && i != 0)
-            {
-                printf("%d", i);
-            }
-            else
-                printf("%d ", i % 10);
-        }
-        printf("  ||\n");
+        printf("-");
     }
+    printf("  ||\n");
+}
+
+// 打印雷数及标注说明
+void print_mine(int col, int mine)
+{
+    printf("||");
+    for (int i = 0; i <= col * 2 + 4; i++)
+    {
+        printf("-");
+    }
+    printf("||\n");
+    printf("||");
+    printf(" mine: %d||", mine);
+    printf("tab->(0, 0) ");
+    if (col > 9)
+    {
+        for (int i = 0; i < col * 2 - 18; i++)
+        {
+            printf(" ");
+        }
+    }
+
+    printf("||\n");
 }

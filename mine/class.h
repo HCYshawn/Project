@@ -16,7 +16,7 @@ protected:
         : _row(row),
           _col(col),
           _re(re),
-          chess(col, std::vector<char>(row, re))
+          chess(row, std::vector<char>(col, re))
     {
     }
 
@@ -35,7 +35,7 @@ class Chessinitial_Mine : public Chessinitial
 public:
     Chessinitial_Mine(int row, int col, char re)
         : Chessinitial(row, col, re) {}
-    void print_row(int i) override { /* 空实现或抛出异常 */ }
+    void print_row(int i) override {}
 };
 
 // 显示棋盘类
@@ -50,6 +50,11 @@ public:
         const auto &show_chess = GetChess();
         for (int j = 0; j < show_chess[i].size(); j++)
         {
+            if (j == show_chess[i].size() - 1)
+            {
+                std::cout << show_chess[i][j];
+                continue;
+            }
             std::cout << show_chess[i][j] << " ";
         }
     }

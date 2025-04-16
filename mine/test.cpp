@@ -3,20 +3,26 @@
 #include "client.h"
 #include "print.h"
 /*
-2025_3_29 ~
+2.0 -> 2025_3_29 ~ 2025_4_16
+
 
 */
 
-void test1()
+void game()
 {
-
     int select = 1;
-
     do
     {
         print_welcome();
         std::cout << "please select: ";
-        std::cin >> select;
+
+        if (!(std::cin >> select))
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            select = -1;
+        }
+
         if (select == 1)
         {
             print_menu();
@@ -31,19 +37,19 @@ void test1()
             }
             case 1:
             {
-                Client client(ROW1, COL1, GAMEMINE1, 0);
+                Client client(ROW1, COL1, GAMEMINE1, 0, 0);
                 client.Play();
                 break;
             }
             case 2:
             {
-                Client client(ROW2, COL2, GAMEMINE2, 0);
+                Client client(ROW2, COL2, GAMEMINE2, 0, 0);
                 client.Play();
                 break;
             }
             case 3:
             {
-                Client client(ROW3, COL3, GAMEMINE3, 0);
+                Client client(ROW3, COL3, GAMEMINE3, 0, 0);
                 client.Play();
                 break;
             }
@@ -54,7 +60,7 @@ void test1()
                 int mine = 0;
                 std::cout << "please input row col win: ";
                 std::cin >> row >> col >> mine;
-                Client client(row, col, mine, 0);
+                Client client(row, col, mine, 0, 0);
                 client.Play();
                 break;
             }
@@ -67,52 +73,55 @@ void test1()
         }
         else if (select == 2)
         {
-            std::cout << "please select a description language: " << std::endl;
-            std::cout << "1. 中文 2. ENGLISH " << std::endl;
-            int j = 0;
-            std::cout << "please select: ";
-            std::cin >> j;
-            if (j == 1)
+            int lang_choice;
+            bool exit_lang_menu = false;
+
+            do
             {
-                print_description_chinese();
-            }
-            else if (j == 2)
-            {
-                print_description_english();
-            }
-            else
-                std::cout << "exit..." << std::endl;
+                std::cout << "please select a description language: " << std::endl;
+                std::cout << "1. 中文 2. ENGLISH 0.EXIT " << std::endl;
+                int j = 0;
+                std::cout << "please select: ";
+
+                if (!(std::cin >> lang_choice))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Error: Please enter the numeric option!\n";
+                    continue;
+                }
+
+                switch (lang_choice)
+                {
+                case 1:
+                    print_description_chinese();
+                    break;
+                case 2:
+                    print_description_english();
+                    break;
+                case 0:
+                    exit_lang_menu = true;
+                    break;
+                default:
+                    std::cout << "error,please re-enter" << std::endl;
+                }
+            } while (!exit_lang_menu);
+        }
+        else if (select == 0)
+        {
+            std::cout << "game exit...\n";
+            break;
         }
         else
         {
-            std::cout << "game exit..." << std::endl;
-            break;
+            std::cout << "error,please re-enter\n";
         }
-    } while (select);
+    } while (true);
 }
 
 int main()
 {
-    SetConsoleOutputCP(CP_UTF8);
-    // Chessinitial_Factory *minefactory = new MineFactory();
-    // Chessinitial_Factory *showfactory = new ShowFactory();
-
-    // // 锟斤拷锟斤拷锟斤拷同锟斤拷品
-    // Chessinitial *mineMap = minefactory->create(ROW2, COL2, MINE);
-    // Chessinitial *showLayer = showfactory->create(ROW2, COL2, SHOW);
-    // // 使锟矫诧拷品
-    // mineMap->print();
-    // std::cout << std::endl;
-    // showLayer->print();
-    // std::cout << std::endl;
-
-    // // 锟街讹拷锟酵凤拷锟节达拷
-    // delete mineMap;
-
-    // delete showLayer;
-    // delete minefactory;
-    // delete showfactory;
-
-    test1();
+    // SetConsoleOutputCP(CP_UTF8);
+    game();
     return 0;
 }
